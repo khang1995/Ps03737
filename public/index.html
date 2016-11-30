@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+    if(localStorage.getItem("key") == null){
+        location='home.html';
+    }
+</script>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#2e6da4">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Giúp bạn quản lý tiền bạc một cách hiệu quả, lịch sử số tiền đã sử dụng qua đó lập kế hoạch để chi tiêu một cách khoa học hơn" />
+    <title>Trang chủ - Quản lý chi tiêu</title>
+    <link rel="shortcut icon" href="images/logo.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="css/nprogress.css" rel="stylesheet">
+    <link href="css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.css" />
+    <style type="text/css">
+      .btn-group input[type="radio"] {
+        display: none;
+
+      }
+      .btn-group label{
+        width: 80px;
+      }
+      select{
+        height: 35px;
+        border-radius: 4px;
+      }
+      textarea{
+        min-height: 80px;
+        max-height: 80px;
+        resize: none;
+      }
+      option{
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body class="nav-md ">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Khang Lâm Site</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="profile">
+              <div class="profile_pic">
+                <img src="images/images.png" class="avatar1 img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Chào bạn</span>
+                <h2 id="left-col-name"></h2>
+              </div>
+            </div>
+            <b>&nbsp;</b>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu" >
+                  <li class="active"><a href="index.html" ><i class="fa fa-home"></i>Trang Chủ</a></li>
+                  <li><a href="history.html" ><i class="fa fa-area-chart"></i>Lịch sử thu chi</a>
+                  </li>
+                </ul>
+              </div>        
+            </div>
+          </div>
+        </div>
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/images.png" class="avatar1" alt=""><b class="profilename"></b>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu pull-right" style="width: 220px;">
+                    <li  style="height: 35px;border-bottom: 1px solid #ccc"><a href="profile.html">Tài khoản<i class="fa fa-user pull-right" style="padding-right: 3px;padding-top: 1px"></i></a></li>
+                    <li  style="height: 35px"><a href="home.html" id="logout">Đăng xuất<i class="fa fa-sign-out pull-right" style="padding-top: 1px"></i></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="tablist" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Nhập chi</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Nhập thu</a>
+                        </li>
+                         <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-usd" style="font-size: 9px"></i> <i class=" fa fa-arrows-h" style="font-size: 7px"></i> <i class="fa fa-credit-card" style="font-size: 9px"></i></a>
+                        </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane active in fade" id="tab_content1" aria-labelledby="home-tab">
+                             <form id="chitieuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style=";margin-top: 10px">Loại chi tiêu<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-3 col-xs-4 ">
+                                            <label class="btn btn-primary" id="ct1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" name="chitieu" value="Ăn"  data-parsley-multiple="gender"> Ăn
+                                            </label>
+                                          </div>
+                                          <div class="col-md-3 col-xs-4 ">
+                                          <label class="btn btn-danger" id="ct2" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" value="Uống" data-parsley-multiple=""> Uống
+                                          </label>
+                                          </div>
+                                          <div class="col-md-3 col-xs-4 ">
+                                            <label class="btn btn-primary" id="ct3" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" value="Mua đồ" data-parsley-multiple=""> Mua đồ
+                                          </label>
+                                          </div>
+                                          <div class="col-md-3 col-xs-4 ">
+                                            <label class="btn btn-info" id="ct4" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" value="Đổ xăng" data-parsley-multiple=""> Đổ xăng</label>
+                                          </div>
+                                          <div class="col-md-3 col-xs-4 ">
+                                            <label class="btn btn-warning" id="ct5" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="chitieu" value="Đi chơi" data-parsley-multiple=""> Đi chơi
+                                            </label>
+                                          </div>
+                                          <div class="col-md-3 col-xs-4 ">
+                                            <label class="btn btn-info" id="ct6" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="chitieu" value="Khác" data-parsley-multiple=""> Khác
+                                            </label>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"  style=";margin-top: 10px">Tài khoản<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-9 col-sm-9 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <label class="btn btn-primary fa fa-usd active" id='tk1' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" name="taikhoan" value="Tiền mặt" checked="checked" data-parsley-multiple="gender">Tiền mặt
+                                            </label>
+                                          </div>
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <a href="#" data-target="#myModal3" data-toggle="modal" data-backdrop="static" data-keyboard="false"><label class="btn btn-danger fa fa-credit-card" id='tk2' style="margin-top: 10px;">
+                                              <input type="radio" name="taikhoan" value="Card" data-parsley-multiple=""> Card
+                                            </label></a>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien" required="required" class="form-control col-md-7 col-xs-12" data-chi="1"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chọn ngày giờ<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker4' />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mô tả<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <textarea class="form-control" rows="5" id="mota" data-chi="2"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 err">      
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button type="reset" class="btn btn-primary">Làm mới</button>
+                                  <button type="button" onclick="myclick()" style="display: none" class="btn btn-success btnhide">Thêm</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade  " id="tab_content2" aria-labelledby="profile-tab">
+                          <form id="khoanthuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style=";margin-top: 10px">Loại thu nhập<span class="required">*</span></label>
+                                <div id="thunhap" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-primary" id='tn1' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" name="khoanthu" value="Lương"> Lương
+                                            </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-warning" id='tn2' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="khoanthu" value="Bán đồ" data-parsley-multiple=""> Bán đồ</label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-success" id='tn3' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="khoanthu" value="Khác" data-parsley-multiple=""> Khác
+                                            </label>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"  style=";margin-top: 10px">Tài khoản<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <label class="btn btn-primary fa fa-usd active" id='tk3' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" name="taikhoan1" value="Tiền mặt" checked="checked" data-parsley-multiple="gender">Tiền mặt
+                                            </label>
+                                          </div>
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <a href="#" data-target="#myModal3" data-toggle="modal" data-backdrop="static" data-keyboard="false"><label class="btn btn-danger fa fa-credit-card" id='tk4' style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="taikhoan1" value="Card" data-parsley-multiple=""> Card
+                                            </label></a>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien1" required="required" class="form-control col-md-7 col-xs-12" data-thu="1"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chọn ngày giờ<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker5' />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" >Mô tả<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control" rows="5"  id="motathu" data-thu="2"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 err2">    
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button type="reset" class="btn btn-primary">Làm mới</button>
+                                  <button type="button" id="themthu" style="display: none" class="btn btn-success btnhide">Thêm</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade  " id="tab_content3" aria-labelledby="profile-tab">
+                          <h4>Chuyển tiền giữa các tài khoản</h4>
+                          <form data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chế độ chuyển<span class="required">*</span>
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 chedochuyen">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền chuyển<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien2" required="required" class="form-control col-md-7 col-xs-12" data-thu="1"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chọn ngày giờ<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker6'/>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 err6"> 
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button type="reset" class="btn btn-primary">Làm mới</button>
+                                  <button type="button" id="themchuyen" style="display: none" class="btn btn-success btnhide">Chuyển</button>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12" >                 
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2>Thống kê số dư</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                             <div class="x_content" style="height:480px">
+                                <div class="row">
+                                    <div class="animated flipInY col-md-12 col-sm-12 col-xs-12">
+                                      <div class="tile-stats">
+                                        <div class="icon"><i class="fa fa-usd "></i>
+                                        </div>
+                                        <a href="#" data-toggle="modal" data-target="#myModal" ><h2 style="margin: 15px;color:#5cb85c">Tiền mặt</h2>
+                                        <div class="count"><h3 style="color:#73879C;margin-left: 7px;font-size: 20px;margin-top: 20px" id="sotienmathientai">0 vnđ</h3></div></a>
+                                        <a href="#" data-toggle="modal" data-target="#myModal1"  style="float: right;margin-right: 30px" >Cập nhật</a>
+                                      </div>
+                                    </div>
+                                    <div class="animated flipInY col-md-12 col-sm-12 col-xs-12">
+                                      <div class="tile-stats">
+                                        <div class="icon" style="margin-right: 17px"><i class="fa fa-credit-card" ></i>
+                                        </div>
+                                        <a href="#" data-toggle="modal" data-target="#myModal4"><h2 style="margin: 15px;color:#5bc0de">Thẻ tín dụng</h2>
+                                        <div class="count"><h3 style="color:#73879C;margin-left: 7px;font-size: 20px;margin-top: 20px" >Chi tiết</h3></div></a>
+                                      </div>
+                                    </div>
+                                    <div class="animated flipInY col-md-12 col-sm-12 col-xs-12">
+                                      <div class="tile-stats">
+                                        <div class="icon" style="margin-right: 15px"><i class="fa fa-archive" ></i>
+                                        </div>
+                                        <a href="#" id="clicksercetmoney"><h2 style="margin: 15px;color:#eea236">Tiền tiết kiệm</h2>
+                                        <div class="count"><h3 style="color:#73879C;margin-left: 7px;font-size: 20px;margin-top: 20px" >Chi tiết</h3></div></a>
+                                      </div>
+                                    </div>
+                                    <div class=" col-md-12 col-sm-12 col-xs-12">
+                                        <div class="ln_solid"></div>
+                                        <div class="count" style="margin: 15px;">
+                                        <h2 style="color:#26B99A;font-size: 20px">Tổng số dư*</h2>
+                                        <h3 style="color:#73879C;font-size: 23px;margin-top: 20px" id="tongsodu">0 vnđ</h3>
+                                        <p style="padding-top: 25px"><i>* bao gồm tiền mặt và tiền trong thẻ tín dụng</i></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div> 
+            </div>  
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">                 
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h4 >Số tiền sử dụng trong tuần</h4>
+                            </div>
+                             <div class="x_content">
+                             <div class="row" >
+                             <center>
+                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <b id="titletuan"></b>
+                               </div>
+                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 30px 0 48px">
+                                  <h2 id="tienhnay"><i class="fa fa-money"></i>&nbsp; &nbsp;<b id="tongtien">0</b>&nbsp;<small>VNĐ</small></h2>
+                               </div>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Ăn"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart" id="chart1" data-percent="0">
+                                <span class="percent" id="vchart1" >0</span></span>
+                                <p style="padding-right: 5px">Ăn</p>
+                              </div></a>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Uống"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart" id="chart2" data-percent="0">
+                                <span class="percent" id="vchart2" >0</span>
+                                </span>
+                                <p style="padding-right: 5px">Uống</p>
+                              </div></a>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Mua đồ"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart" id="chart3" data-percent="0">
+                                <span class="percent" id="vchart3" >0</span>
+                                </span>
+                                <p style="padding-right: 5px">Mua đồ</p>
+                              </div></a>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Đổ xăng"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart" id="chart4" data-percent="0">
+                                <span class="percent" id="vchart4" >0</span>
+                                </span>
+                                <p style="padding-right: 5px">Đổ xăng</p>
+                              </div></a>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Đi chơi"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart"  id="chart5" data-percent="0">
+                                <span class="percent" id="vchart5" >0</span>
+                                </span>
+                                <p style="padding-right: 5px">Đi chơi</p>
+                              </div></a>
+                              <a href="#" class="opendata7ngay" data-loaichitieu="Khác"><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <span class="chart" id="chart6" data-percent="0">
+                                <span class="percent" id="vchart6" >0</span>
+                                </span>
+                                <p style="padding-right: 5px">Khác</p>
+                              </div></a>
+                              </center>
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                      </div>
+            </div>                 
+            <div class="col-lg-4 col-md-12 hidden-xs hidden-sm">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h4>Thời tiết hôm nay</h4>
+                      
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" style="height:480px">
+                    <center>
+                      <div class="row" >
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="temperature">
+                              <p id="todaydate" style="font-size: 18px"></p>
+                              <p id="todayhour" style="font-size: 25px"></p>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class=row>
+                                   <div class="weather-icon col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <canvas id="wi1" style="width:204px;height:84px" id="rain"></canvas>
+                                    </div>
+                                    <div class="weather-text col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <h3 id="m1"></h3>
+                                    </div>
+                                    <div class="weather-text col-lg-12 col-md-12 col-sm-12 col-xs-12" style="float:left">
+                                      <h3 class="degrees" id="d1"></h3>
+                                    </div> 
+                            </div>
+                        </div> 
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="weather-text">
+                            <h2 id="city"></h2>
+                          </div>
+                        </div>
+                        </div>
+                     </center>  
+                      <div class="clearfix"></div>
+                      <center>
+                      <div class="row weather-days">
+                        <div class="col-sm-2 center">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h1">18h</h2>
+                            <h3 class="degrees" id="d2">25</h3>
+                            <canvas id="wi2" style="width:32px;height:32px" ></canvas>
+                            <h5 id="m2"></h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h2">Tue</h2>
+                            <h3 class="degrees" id="d3">25</h3>
+                            <canvas id="wi3" style="width:32px;height:32px" ></canvas>
+                            <h5 id="m3"></h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h3">Wed</h2>
+                            <h3 class="degrees" id="d4">27</h3>
+                            <canvas id="wi4" style="width:32px;height:32px" ></canvas>
+                            <h5 id="m4"></h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h4">Thu</h2>
+                            <h3 class="degrees" id="d5">28</h3>
+                            <canvas id="wi5" style="width:32px;height:32px" ></canvas>
+                            <h5 id="m5"></h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h5">Fri</h2>
+                            <h3 class="degrees" id="d6">28</h3>
+                            <canvas id="wi6" style="width:32px;height:32px"></canvas>
+                            <h5 id="m6"></h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="daily-weather">
+                            <h2 class="day" id="h6">Sat</h2>
+                            <h3 class="degrees" id="d7">26</h3>
+                            <canvas id="wi7" style="width:32px;height:32px" ></canvas>
+                            <h5 id="m7"></h5>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+          <div class="row">
+              <div class="x_panel">
+              <div class="row x_title">
+                  <div class="col-md-6">
+                    <h3>Biểu đồ thống kê chi tiêu</h3>
+                  </div>
+                  <div class="col-md-6">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        </div>
+                  </div>
+                </div>
+                <div class="x_content">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+                  </div>
+              </div>
+          </div>
+          </div>
+          <br />
+            </div>
+        <footer>
+            <p style="float:left">Mọi thắc mắc vui lòng liên hệ:<br>Email:<strong >support@khanglam.info</strong></p>
+            <p style="float:right">Develop by <strong style="font-size: 14px">Khang Lâm</strong><br></p>
+            <div class="clearfix"></div>
+        </footer>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src='js/jquery.js'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/skycons.js"></script>
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <script src="js/jquery.flot.js"></script>
+    <script src="js/jquery.flot.pie.js"></script>
+    <script src="js/jquery.flot.time.js"></script>
+    <script src="js/jquery.flot.stack.js"></script>
+    <script src="js/jquery.flot.resize.js"></script>
+    <script src="js/jquery.flot.orderBars.js"></script>
+    <script src="js/jquery.flot.spline.min.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/daterangepicker.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src='js/Obj.min.js'></script>
+    <script src="js/bootstrap-notify.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/nprogress.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="js/index.js"></script> 
+    <!-- Modal lịch tiền mặt-->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Lịch sử tiền mặt</h2>
+          </div>
+          <div class="modal-body">
+              <p style="float: left">Số dư:<b style="color:#5cb85c" id='hthisoduht'></b> </p>
+              <table class="datatable table table-striped table-bordered">
+                    <thead>
+                              <tr>
+                                <th>Ngày giờ</th>
+                                <th>Trạng thái</th>
+                                <th>Số tiền</th>
+                                <th>Số dư</th>
+                              </tr>
+                            </thead>
+                            <tbody id="lichsutienmat">
+                            </tbody>        
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <a href="history.html" class="btn btn-primary" >Chi tiết</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal lịch tiền mặt-->
+    <div class="modal fade" id="myModal1" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Cập nhật sô dư tiền mặt</h2>
+          </div>
+          <div class="modal-body">
+              <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="  padding-top: 8px;">Số tiền<span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien3" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-12 err3 col-md-offset-3"></div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <button type="button" id="updatesodutienmat" class="btn btn-primary" >Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal chi tiết chi tiêu tuần-->
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Chi tiết số tiền trong tuần</h2>
+          </div>
+          <div class="modal-body">
+              <table class="datatable table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Tài khoản</th>
+                        <th>Ngày giờ</th>
+                        <th>Mô tả</th>
+                        <th>Số tiền</th>
+                      </tr>
+                    </thead>
+                    <tbody id="data7ngay">
+                    </tbody>                
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <a href="history.html" class="btn btn-primary" >Chi tiết</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Modal chi tiết chi tiêu tuần-->
+    <div class="modal fade" id="myModal3" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="h2chonthe">Chọn thẻ</h2>
+            <h2 id="h2themthe">Thêm thẻ</h2>
+          </div>
+          <div class="modal-body">
+            <div id="divthe">
+            </div>
+            <div id="divthemthe">
+                            <form id="khoanthuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tên thẻ<span class="required">*</span></label>
+                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='text' id="tenthe" class="form-control" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số thẻ<span class="required">*</span></label>
+                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='text' class="form-control" id="sothe" maxlength="19"/>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền trong thẻ<span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien4" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12 err4">    
+                                </div>
+                              </div>
+                            </form>
+            </div>
+              <br>
+              <b class="btn btn-success" id="bthemthe">  Thêm thẻ</b>
+              
+          </div>
+          <div class="modal-footer">
+            <b class="btn btn-warning " id="bchonthe"> <i class="fa fa-arrow-left"></i> Chọn thẻ</b>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" id="quayvechontienmat">Đóng</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="chonhide">Chọn</button>
+            <button type="button" style="display: none" id="themthe" class="btn btn-success">Thêm thẻ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="modal fade" id="myModal4" role="dialog" >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="tablist1" class="nav nav-tabs bar_tabs" role="tablist">
+                      </ul>
+                      <div id="myTabContent2" class="tab-content">                       
+                      </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal5" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Nhập mật khẩu</h2>
+          </div>
+          <div class="modal-body">
+            <p style="margin-bottom: 20px"><i>Vì lý do bảo mật nên bạn phải nhập lại mật khẩu để xác minh bạn là chủ tải khoản</i></p>
+            <div class="form-group row">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="  padding-top: 8px;">Mật khẩu tài khoản<span class="required">*</span>
+                  </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                   <input type="password" min="0" max="99999999" id="password" required="required" class="form-control col-md-7 col-xs-12"/>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12 err5 col-md-offset-3"></div>              
+            </div>
+            <p><i>Khi đăng thành công bạn không cần phải nhập lại mật khẩu cho đến khi đóng mở lại trình duyệt</i></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary" id="accesssercetmoney">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal6" role="dialog" tabindex="10">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Tiền bí mật</h2>
+          </div>
+          <div class="modal-body">
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="tablist2" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" id="ttkactive" class="active"><a href="#tab_content4" class="danhsachthe" role="tab" data-toggle="tab" data-tab="tab1" aria-expanded="false">Tiền tiết kiệm</a>
+                        </li>
+                        <li role="presentation" id="nganhangactive"><a href="#tab_content5" role="tab" class="danhsachthe"  data-toggle="tab" data-tab="tab" aria-expanded="true">Tiền gửi ngân hàng</a>
+                        </li>
+                      </ul>
+                      <div id="myTabContent3" class="tab-content">
+                         <div role="tabpanel" class="tab-pane active in fade" id="tab_content4" aria-labelledby="home-tab">
+                            <a href="#" class="pull-right" id="capnhatttk">Cập nhật</a>
+                            <button type="button" id="huyttk" style="display: none" class="btn btn-sm btn-danger pull-right" >Huỷ</button>
+                            <button type="button" id="xacnhanttk"  style="display: none" class="btn btn-sm btn-success pull-right" >OK</button>
+                            <p style="float: left"><b style="color:#5cb85c">Số dư</b>: </p>
+                            <input id="tientietkiem" type="text"  disabled style="margin-left: 5px;background-color: rgba(0, 0, 0, 0); border:none;">
+                            <div style="clear: both"></div>
+                            <h2>Lịch sử chuyển tiền</h2> 
+                            <table class="datatable table table-striped table-bordered" style="width: 100%"> 
+                              <thead> <tr><th>Loại chuyển</th> <th>Ngày giờ</th> <th>Trạng thái</th> <th>Số dư</th> </tr> </thead> 
+                              <tbody id="khoanchuyen"></tbody> 
+                            </table> 
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="home-tab">
+                            <a href="#" class="btn btn-primary pull-right" id="themsotk">Thêm sổ tiết kiếm</a>
+                            <p style="padding-top: 40px"><b >Danh sách sổ tiết kiệm</b></p>
+                            <div id='danhsachsotietkiem'>
+                              
+                            </div>
+                    </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- Modal chi tiết chi tiêu tuần-->
+    <div class="modal fade" id="myModal7" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 >Thêm sổ tiết kiệm</h2>
+          </div>
+          <div class="modal-body">
+                            <form id="khoanthuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tên ngân hàng gửi<span class="required">*</span></label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='text' id="tennganhang" class="form-control" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lãi suất(%/năm)<span class="required">*</span></label>
+                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='number' class="form-control" id="laisuat" maxlength="5"/>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền<span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien8" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ngày đáo hạn<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker8' />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12 err8">
+                                <div class="ln_solid"></div>       
+                                </div>
+                              </div>
+                            </form> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" id="quayvedanhsachtietkiem">Quay về</button>
+            <button type="button" class="btn btn-success" id="themsotietkiem">Thêm</button>
+            <button type="button" style="display: none" class="btn btn-primary" id="capnhatsotietkiem">Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+     <!-- Modal chi tiết chi tiêu tuần-->
+    <div class="modal fade" id="myModal8" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 >Xoá sổ tiết kiệm</h2>
+          </div>
+          <div class="modal-body">
+                <h2>Bạn có thật sự muốn xoá số tiết kiệm này không?</h2>             
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="quayvedanhsachtietkiem">Quay về</button>
+            <button type="button"  class="btn btn-danger" data-dismiss="modal" id="xacnhanxoasotietkiem">Xoá</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal9" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Cập nhật thẻ</h2>
+          </div>
+          <div class="modal-body">
+                            <form id="khoanthuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tên thẻ<span class="required">*</span></label>
+                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='text' id="updatetenthe" class="form-control" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số thẻ<span class="required">*</span></label>
+                                 <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type='text' class="form-control" id="updatesothe" maxlength="19"/>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền trong thẻ<span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="updatesotien" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12 err9">
+                                <div class="ln_solid"></div>       
+                                </div>
+                              </div>
+                            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger quayvedanhsachthe" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary"  id="capnhatdanhsachthe">Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal10" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 >Xoá sổ tiết kiệm</h2>
+          </div>
+          <div class="modal-body">
+                <h2>Bạn có thật sự muốn xoá thẻ này không?</h2>             
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary quayvedanhsachthe" data-dismiss="modal" >Quay về</button>
+            <button type="button"  class="btn btn-danger" data-dismiss="modal" id="xacnhanxoadanhsachthe">Xoá</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

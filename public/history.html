@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+        if(localStorage.getItem("key")==null){
+          location='home.html';
+        }
+</script>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#2e6da4">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lịch sử chi tiêu</title>
+    <link rel="shortcut icon" href="images/logo.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="css/nprogress.css" rel="stylesheet">
+    <link href="css/custom.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.css" />
+    <style type="text/css">
+      .btn-group input[type="radio"] {
+        display: none;
+      }
+      .btn-group label{
+        width: 80px;
+      }
+      #lichsukhoanchi tr td span{
+        display: none;
+      }
+      #lichsuthunhap tr td span{
+        display: none;
+      }
+      select{
+        height: 35px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="nav-md footer_fixed">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Khang Lâm Site</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="profile">
+              <div class="profile_pic">
+                <img src="images/images.png" class="avatar1 img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Chào bạn</span>
+                <h2 id="left-col-name"></h2>
+              </div>
+            </div>
+            <b>&nbsp;</b>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu" >
+                  <li><a href="index.html" ><i class="fa fa-home"></i>Trang Chủ</a></li>
+                  <li class="active"><a href="history.html"><i class="fa fa-area-chart"></i>Lịch sử thu chi</a>
+                  </li>
+                </ul>
+              </div>        
+            </div>
+          </div>
+        </div>
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/images.png" class="avatar1" alt=""><b class="profilename"></b>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu pull-right" style="width: 250px;height: 90px">
+                    <li  style="height: 50%;"><a href="profile.html">Tài khoản<i class="fa fa-user pull-right"></i></a></li>
+                    <li  style="height: 50%"><a href="home.html" id="logout" >Đăng xuất<i class="fa fa-sign-out pull-right"></i></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="right_col" role="main">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="tablist" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" id="chitieuactive" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Chi tiêu</a>
+                        </li>
+                        <li role="presentation" id="thunhapactive" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Thu nhập</a>
+                        </li>
+                        <li role="presentation" id="chuyenactive" class=""><a href="#tab_content3" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-usd" style="font-size: 9px"></i> <i class=" fa fa-arrows-h" style="font-size: 7px"></i> <i class="fa fa-credit-card" style="font-size: 9px"></i></a>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane active in fade" id="tab_content1" aria-labelledby="home-tab">
+                          <table class="datatable table table-striped table-bordered" style="width: 100%">
+                            <thead>
+                              <tr>
+                                <th>Loại chi tiêu</th>
+                                <th>Tài khoản</th>
+                                <th>Số tiền</th>
+                                <th>Ngày giờ</th>
+                                <th>Mô tả</th>
+                                <th>Hành động</th>
+                              </tr>
+                            </thead>
+                            <tbody id="lichsukhoanchi">
+                            </tbody>
+                          </table>
+                      </div>
+                       <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                          <table  class=" datatable1 table table-striped table-bordered" style="width: 100%">
+                            <thead>
+                              <tr>
+                                <th>Loại thu nhập</th>
+                                <th>Tài khoản</th>
+                                <th>Số tiền</th>
+                                <th>Ngày giờ</th>
+                                <th>Mô tả</th>
+                                <th>Hành động</th>
+                              </tr>
+                            </thead>
+                            <tbody id="lichsuthunhap">
+                              
+                           </tbody>
+                          </table>
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                          <table  class=" datatable2 table table-striped table-bordered" style="width: 100%">
+                            <thead>
+                              <tr>
+                                <th>Loại chuyển</th>
+                                <th>Số tiền</th>
+                                <th>Số dư TK được chuyển</th>
+                                <th>Ngày giờ</th>
+                                <th>Hành động</th>
+                              </tr>
+                            </thead>
+                            <tbody id="lichsuthunhap">
+                              
+                           </tbody>
+                          </table>
+                      </div>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <footer>
+        <div class="clearfix">
+          <div class="pull-right" style="padding-right: 15px">
+            Develop by <strong style="font-size: 17px">Khang Lâm</strong>
+          </div>
+        </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Modal-->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Sửa chi tiêu</h4>
+          </div>
+          <div class="modal-body">
+            <form id="chitieuform1" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style=";margin-top: 10px">Loại chi tiêu<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-4 col-xs-4 ">
+                                            <label class="btn btn-primary" id="Ăn1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" name="chitieu" id="Ăn" value="Ăn"> Ăn
+                                            </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4 ">
+                                          <label class="btn btn-danger" id="Uống1" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" id="Uống" data-parsley-multiple="" value="Uống"> Uống
+                                          </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4 ">
+                                            <label class="btn btn-primary" id="muado1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" id="muado" data-parsley-multiple="" value="Mua đồ"> Mua đồ
+                                          </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4 ">
+                                            <label class="btn btn-info" id="doxang1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="chitieu" id="doxang" data-parsley-multiple="" value="Đổ xăng"> Đổ xăng</label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4 ">
+                                            <label class="btn btn-warning" id="dichoi1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="chitieu" id="dichoi" data-parsley-multiple="" value="Đi chơi"> Đi chơi
+                                            </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4 ">
+                                            <label class="btn btn-info" id="Khác1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="chitieu" id="Khác" data-parsley-multiple="" value="Khác"> Khác
+                                            </label>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style=";margin-top: 10px">Tài khoản<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <label class="btn btn-primary fa fa-usd active" id='tienmat1' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" id='tienmat' type="radio" name="taikhoan" value="Tiền mặt" checked="checked" data-parsley-multiple="gender">Tiền mặt
+                                            </label>
+                                          </div>
+                                          <div class="col-md-6 col-xs-6 ">
+                                           <a href="#" data-target="#myModal4" data-toggle="modal" data-backdrop="static" data-keyboard="false"><label class="btn btn-danger fa fa-credit-card" id='card1' style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="taikhoan" id='card' value="Card" data-parsley-multiple=""> Card
+                                          </label></a>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chọn ngày giờ<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker4' />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mô tả<span class="required">*</span></label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <textarea class="form-control" rows="5" style="resize: none;" id="mota"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 err">
+                              <div class="ln_solid"></div>       
+                              </div>
+                              </div>
+                            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary" onclick="myclick()"  >Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Xoá chi tiêu</h4>
+          </div>
+          <div class="modal-body">
+                <p>Bạn có chắc muốn xoá chi tiêu "<i id='delmota'></i>" (<b id='deltien'></b>) không?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Quay lại</button>
+            <button type="button" class="btn btn-danger" onclick="confirmdel()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Sửa thu nhập</h4>
+          </div>
+          <div class="modal-body">
+               <form id="khoanthuform" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" style=";margin-top: 10px">Loại thu nhập</label>
+                                <div id="thunhap" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-primary" id="luong1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" id="luong" name="khoanthu" value="Lương"> Lương
+                                            </label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-warning" id="bando1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                            <input type="radio" name="khoanthu" value="bando" id="bando" data-parsley-multiple=""> Bán đồ</label>
+                                          </div>
+                                          <div class="col-md-4 col-xs-4">
+                                            <label class="btn btn-success" id="khacthu1" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="khoanthu" value="Khác" id="khacthu" data-parsley-multiple=""> Khác
+                                            </label>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"  style=";margin-top: 10px">Tài khoản<span class="required">*</span></label>
+                                <div id="chitieu" class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row btn-group" data-toggle="buttons">
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <label class="btn btn-primary fa fa-usd active" id='tienmat2' data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary" style="margin-right: 10px;margin-top: 10px">
+                                              <input class="btn btn-outline-primary" type="radio" id="tienmat3" name="taikhoan1" value="Tiền mặt" checked="checked" data-parsley-multiple="gender">Tiền mặt
+                                            </label>
+                                          </div>
+                                          <div class="col-md-6 col-xs-6 ">
+                                            <a href="#" data-target="#myModal4" data-toggle="modal" data-backdrop="static" data-keyboard="false"><label class="btn btn-danger fa fa-credit-card" id='card2' style="margin-right: 10px;margin-top: 10px">
+                                              <input type="radio" name="taikhoan1" value="Card" id="card3" data-parsley-multiple=""> Card
+                                            </label></a>
+                                          </div>
+                                    </div>  
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Số tiền <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input type="text" min="0" max="99999999" id="sotien1" required="required" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Chọn ngày giờ</label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type='text' class="form-control" id='datetimepicker5' />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mô tả</label>
+                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <textarea class="form-control" rows="5" style="resize: none;" id="motathu"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 err">
+                              <div class="ln_solid"></div>       
+                              </div>
+                              </div>
+                            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-danger" data-dismiss="modal">Quay lại</button>
+            <button type="button" id="themthu" class="btn btn-primary">Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Xoá thu nhập</h4>
+          </div>
+          <div class="modal-body">
+                <p>Bạn có chắc muốn xoá thu nhập "<i id='delmotathu'></i>" (<b id='deltienthu'></b>) không?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Quay lại</button>
+            <button type="button" class="btn btn-danger" onclick="confirmdel1()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal6" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Xoá khoản chuyển</h4>
+          </div>
+          <div class="modal-body">
+                <p>Bạn có chắc muốn xoá khoản chuyển này không?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Quay lại</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="confirmdel2()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Modal chi tiết chi tiêu tuần-->
+    <div class="modal fade" id="myModal4" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="h2chonthe">Chọn thẻ</h2>
+          </div>
+          <div class="modal-body">
+            <div id="divthe">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" id="quayvechontienmat">Đóng</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="chonhide">Chọn</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src='js/jquery.js'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/nprogress.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-notify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/history.js">
+    </script>
+</html>

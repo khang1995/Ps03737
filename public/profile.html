@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+    if(localStorage.getItem("key")==null){
+        location='home.html';
+    }
+</script>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="profilename1"></title>
+    <meta name="theme-color" content="#2e6da4">
+    <link rel="shortcut icon" href="images/logo.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.css" />
+    <style type="text/css">
+      #loading-img {
+          background-image: url('images/loading.gif');
+          background-position: center; 
+          background-repeat: no-repeat;
+          height: 100%;
+          
+      }
+
+      .overlay {
+          position: absolute;
+          display: none;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          opacity: 0.5;
+      }
+    </style>   
+  </head>
+  <body class="nav-md footer_fixed">
+    
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Khang Lâm Site</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="profile">
+              <div class="profile_pic">
+                <img src="images/images.png" class="img-circle profile_img avatar1">
+              </div>
+              <div class="profile_info">
+                <span>Chào bạn</span>
+                <h2 id="left-col-name"></h2>
+              </div>
+            </div>
+            <b>&nbsp;</b>
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu" >
+                  <li><a href="index.html" ><i class="fa fa-home"></i>Trang Chủ</a></li>
+                  <li><a href="history.html" ><i class="fa fa-area-chart"></i>Lịch sử thu chi</a>
+                  </li>
+                </ul>
+              </div>        
+            </div>
+          </div>
+        </div>
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/images.png" alt="" class="avatar1"><b class="profilename"></b>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu pull-right" style="width: 250px;height: 90px">
+                    <li  style="height: 50%;"><a href="profile.html">Tài khoản<i class="fa fa-user pull-right"></i></a></li>
+                    <li  style="height: 50%"><a href="home.html" id="logout">Đăng xuất<i class="fa fa-sign-out pull-right"></i></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+       
+        <div class="right_col" role="main" style="background: #fff">
+          <div class="">
+            <div class="clearfix"></div>
+            <div class="row" >
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" style="border: 0px">
+                  <div class="x_title">
+                    <h2>Thông tin người dùng</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  
+                  <center>
+                    <div class=" col-xs-12 profile_left">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                        <form id="uploadimage" method="post" action="" enctype="multipart/form-data">
+                          <a href="#" id="openchooseimg"> <img class="avatar1 img-circle" src="images/images.png" alt="Avatar" title="Change the avatar" width="250" height="250"></a>
+                           <input type="file" name='file' id="theFile" style="display: none" required/>
+                        </form>
+                        </div>
+                      </div>
+                      <h3 id="profilename"></h3>
+                      <div class="row">
+                        <div class="overlay">
+                    <div id="loading-img"></div>
+                  </div>
+                        <a href="#" class="col-md-4 col-md-offset-4 col-xs-12" data-target="#myModal" data-toggle="modal" id="openemail">
+                           <h4 class="pull-left" id="email">Email:</h4>
+                           <b class="pull-right fa fa-edit" style="margin-top: 12px"></b>
+                        </a>
+                        <a href="#" class="col-md-4 col-md-offset-4 col-xs-12" data-target="#myModal" data-toggle="modal" id="openpassword">
+                           <h4 class="pull-left" id="password">Mật khẩu:  ********</h4>
+                           <b class="pull-right fa fa-edit" style="margin-top: 12px"></b>
+                        </a>
+                      </div>
+                      </ul>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+        <div class="clearfix">
+          <div class="pull-right" style="padding-right: 15px">
+            Develop by <strong style="font-size: 17px">Khang Lâm</strong>
+          </div>
+        </div>
+        </footer>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="title">Cập nhật Email</h2>
+          </div>
+          <div class="modal-body">
+              <div class="form-group row">
+                                <div>
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" id="title2" style=" padding-top: 8px;">Mật khẩu cũ<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="password" id="oldpassword" required="required" class="form-control col-md-7 col-xs-12" style="margin-bottom: 10px"/>
+                                  </div>
+                                </div>
+                                <div id="showmatkhaumoi">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"  style=" padding-top: 8px;">Mật khẩu mới<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="password" id="newpassword" required="required" class="form-control col-md-7 col-xs-12" style="margin-bottom: 10px"/>
+                                  </div>
+                                </div>
+                                <div id="showemail" >
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style=" padding-top: 8px;">Email mới<span class="required">*</span>
+                                  </label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" id="value" required="required" class="form-control col-md-7 col-xs-12"/>
+                                  </div>
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-12 err col-md-offset-3" style="margin-top: 10px"></div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            <button type="button" id="updateEmail" class="btn btn-primary" >Cập nhật</button>
+            <button type="button" id="updatePassword" class="btn btn-primary" >Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+    <script src='js/jquery.js'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/bootstrap-notify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

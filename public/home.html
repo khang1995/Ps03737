@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+    if(localStorage.getItem("key") != null){
+        location='index.html';
+    }
+</script>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#2e6da4">
+        <title>Money Manager - Quản lý tiền của bạn 1 cách hiệu quả</title>
+        <meta name="description" content="Giúp bạn quản lý tiền bạc một cách hiệu quả, lịch sử số tiền đã sử dụng qua đó lập kế hoạch để chi tiêu một cách khoa học hơn" />
+		<meta http-equiv="content-language" content="vi" />
+		<link rel="alternate" href="http://www.quanlychitieu.info" hreflang="vi-vn" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/form-elements.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="images/logo.png">
+		
+        <style class="keyframe-style" id="CustomAnimation" type="text/css">@keyframes CustomAnimation {0% {background-position:7% 0%;}50% {background-position:94% 100%;}100% {background-position:7% 0%;}}</style>
+    </head>
+    <body style="background: linear-gradient(150deg, rgb(232, 116, 116), rgb(103, 155, 228), rgb(94, 232, 215), rgb(225, 222, 113)) 0% 0% / 400% 400%; animation: CustomAnimation 59s ease infinite;">
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>Chào mừng bạn</strong></h1>
+                            <div class="description">
+                            	<h3 style="color:black">
+	                            	Đây là <strong>Web Application</strong> giúp bạn quản lý <strong>tiền</strong> của bạn một cách hiệu quả nhất
+                            	</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-5">
+                        	
+                        	<div class="form-box">
+	                        	<div class="form-top">
+	                        		<div class="form-top-left">
+	                        			<h3>Đăng nhập</h3>
+	                        		</div>
+	                        		<div class="form-top-right">
+	                        			<i class="fa fa-lock"></i>
+	                        		</div>
+	                            </div>
+	                            <div class="form-bottom">
+				                    <form role="form" action="" method="post" class="login-form">
+				                    	<div class="form-group">
+				                    		<label class="sr-only" for="form-username">Tài khoản</label>
+				                        	<input type="text" name="form-username" placeholder="Tên đăng nhập hoặc email" class="form-username form-control" id="signinusername" data-index-login="1">
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" for="form-password">Mật khẩu</label>
+				                        	<input type="password" name="form-password" placeholder="Mật khẩu" class="form-password form-control" id="signinpassword" data-index-login="2">
+				                        </div>
+                                        <a href="#" class="  pull-right" style="margin-bottom: 5px" data-toggle="modal" data-target="#myModal">Quên mật khẩu</a>
+				                        <div class='err col-md-12'></div>
+                                        </form>
+				                        <button type="button" class="btn btn-block" id="signin" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang đăng nhập">Đăng nhập</button>
+			                    </div>
+		                    </div>
+                        </div>    
+                        <div class="col-sm-1 middle-border"></div>
+                        <div class="col-sm-1"></div>
+                        	
+                        <div class="col-sm-5">
+                        	
+                        	<div class="form-box">
+                        		<div class="form-top">
+	                        		<div class="form-top-left">
+	                        			<h3>Đăng ký</h3>
+	                        		</div>
+	                        		<div class="form-top-right">
+	                        			<i class="fa fa-pencil"></i>
+	                        		</div>
+	                            </div>
+	                            <div class="form-bottom">
+				                    <form role="form" action="" method="post" class="registration-form">
+				                    	<div class="form-group">
+				                    		<label class="sr-only" for="form-first-name">Name</label>
+				                        	<input type="text"  placeholder="Họ tên của bạn" class="form-first-name form-control" id="registername" data-index="1">
+				                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-first-name">Email</label>
+                                            <input type="text"  placeholder="Email của bạn" class="form-first-name form-control" id="registeremail" data-index="2">
+                                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" for="form-last-name">Username</label>
+				                        	<input type="text" placeholder="Tên đăng nhập" class="form-last-name form-control" id="registerusername" data-index="3">
+				                        </div>
+				                        <div class="form-group">
+				                        	<label class="sr-only" for="form-email">Password</label>
+				                        	<input type="password" placeholder="Mật khẩu" class="form-email form-control" id="registerpass" data-index="4">
+				                        </div>
+                                        </form>
+				                        <div class='err2 col-md-12'></div>
+				                        <button type="button" class="btn btn-block" id="register">Đăng ký</button>
+			                    </div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <footer>
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Develop by <Strong>Khang Lâm</Strong> </p>
+        			</div>
+        		</div>
+        	</div>
+        </footer>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Quên mật khẩu</h4>
+                </div>
+                <div class="modal-body">
+                     <form id="forgetpass" method="post">
+                        <div class="form-group">
+                             <label class="sr-only" for="form-first-name">Email</label>
+                             <input type="email" name="send_to"  placeholder="Email của bạn" class="form-first-name form-control" id="forgetemail">
+                        </div>
+                        <div class='err3'></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" id="quenmk" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang gửi">Gửi</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
+        <script src='js/jquery.js'></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/bootstrap-notify.js"></script>
+        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+        <script src="js/home.js"></script>
+    </body>
+</html>
